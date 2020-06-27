@@ -27,7 +27,7 @@
 * It can be used only for **User Defined** data types and nt for primitive types.
 
 #### Lab1364.java
-```
+```java
 	package org.as.devtechsolution.reflection.ex1;
 
 	public class Lab1364 {
@@ -65,7 +65,7 @@
 It can be used only for user defined datatypes and not for primitive types.
 
 #### Lab1365.java
-```
+```java
 	package org.as.devtechsolution.reflection.ex1;
 
 	public class Lab1365 {
@@ -101,7 +101,7 @@ It can be used only for user defined datatypes and not for primitive types.
 * It can be used for both user defibed data types as well as primitive data types.
 
 #### Lab1366.java
-```
+```java
 	package org.as.devtechsolution.reflection.ex1;
 
 	public class Lab1366 {
@@ -145,7 +145,7 @@ It can be used only for user defined datatypes and not for primitive types.
 
 
 #### Lab1367.java
-```
+```java
 	package org.as.devtechsolution.reflection.ex2;
 
 	public class Lab1367 {
@@ -180,7 +180,7 @@ It can be used only for user defined datatypes and not for primitive types.
 	
 ```
 #### Color.class
-```
+```java
 	package org.as.devtechsolution.reflection.ex2;
 	
 	public enum Color {
@@ -219,3 +219,88 @@ It can be used only for user defined datatypes and not for primitive types.
 
 	
 ```
+
+---
+
+| Methods | Description |
+| --- | --- |
+| `public String getName()` | Returns the fully qualified name of the entity (class, interface, array class, primitive type, or void) represented by this Class object, as a String. |
+| `public String getSimpleName()` | Returns the simple name of the underlying class as given in the source code.|
+| `public Package getPackage()` | Return the object of Package Class |
+| `public native Class getSuperClass()` |Return the default object of super Class|
+| `public native Class[]  getInterfaces()` | Return the Class type array of implemented interfaces |
+
+#### Lab1368.java
+
+```java
+	package org.as.devtechsolution.reflection.ex2;
+	import java.io.Serializable;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1368 {
+		
+		public static void main(String[] args) {
+			String cname= "org.as.devtechsolution.reflection.ex2.Employee";
+			try {
+				Class cl1= Class.forName(cname);
+				showClassDetails(cl1);
+				Class cl2= "OK".getClass();
+				showClassDetails(cl2);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		static void showClassDetails(Class cl) {
+			System.out.println("\n** Nme:"+ cl.getName());
+			
+			Class superClass= cl.getSuperclass();
+			System.out.println("Super Class:"+ superClass.getName());
+			
+			Package pack= cl.getPackage();
+			System.out.println("Package:"+ pack.getName());
+			
+			Class interf[]= cl.getInterfaces();
+			System.out.println("Implemented Interfaces:");
+			Stream<Class> stream = Arrays.stream(interf);
+			stream.forEach(intr-> {
+				System.out.println(intr.getName());
+			});
+		}
+	
+	}
+	
+	class Person implements Comparable{
+		@Override
+		public int compareTo(Object o) {
+			return 0;
+		}
+	}
+	
+	class Employee extends Person implements Serializable, Cloneable{}
+
+
+```
+
+#### Output:
+```
+	
+	** Nme:org.as.devtechsolution.reflection.ex2.Employee
+	Super Class:org.as.devtechsolution.reflection.ex2.Person
+	Package:org.as.devtechsolution.reflection.ex2
+	Implemented Interfaces:
+	java.io.Serializable
+	java.lang.Cloneable
+	
+	** Nme:java.lang.String
+	Super Class:java.lang.Object
+	Package:java.lang
+	Implemented Interfaces:
+	java.io.Serializable
+	java.lang.Comparable
+	java.lang.CharSequence
+	
+```
+
