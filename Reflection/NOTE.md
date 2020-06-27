@@ -131,3 +131,14 @@ It can be used only for user defined datatypes and not for primitive types.
 	Name: org.as.devtechsolution.reflection.ex1.Hello
 	
 ```
+
+---
+
+| Methods | Description |
+| --- | --- |
+| `public boolean isInterface()` | Determines if the specified Class object represents an interface type |
+| `public boolen isArray()` | Determines if the specified Class represents an array class.|
+| `public boolean isPrimitive()` | Determines if the specified Class object represents a primitive type |
+| `public boolen isAnnotation()` |Determines if the specified Class object represents an Annotation Type (From Java 5)
+| `public boolean isAnonymousClass()` | Determines if the specified Class object represents an Anonyoums type |
+| `public boolen isEnum()` | Determines if the specified Class represents an Enum|
