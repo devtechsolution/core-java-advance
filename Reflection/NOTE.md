@@ -799,7 +799,7 @@ It can be used only for user defined datatypes and not for primitive types.
 #### Creating object using default Constructor
 
 - ***public Object newInstance()**
-####Lab1374.java
+#### Lab1374.java
 ```java
 	package org.as.devtechsolution.reflection.ex5;
 	
@@ -823,7 +823,7 @@ It can be used only for user defined datatypes and not for primitive types.
 		}
 	}
 ```
-####Output:
+#### Output:
 ```
 User Def Cons
 org.as.devtechsolution.reflection.ex5.User@15db9742
@@ -834,7 +834,7 @@ org.as.devtechsolution.reflection.ex5.User@15db9742
 	-- ```Constructor c= c1.getDeclaredConstructor(Class[] paramTypes)```
 - It will throw **java.lang.NoSuchMethodException** if the required constructor  not found.
 
-####Lab1375.java
+#### Lab1375.java
 ```java
 
 	package org.as.devtechsolution.reflection.ex5;
@@ -871,7 +871,7 @@ org.as.devtechsolution.reflection.ex5.User@15db9742
 		}
 	}
 ```
-####Output:
+#### Output:
 	public org.as.devtechsolution.reflection.ex5.Employee(int,java.lang.String,int,long)
 	java.lang.NoSuchMethodException: org.as.devtechsolution.reflection.ex5.Employee.<init>(java.lang.String, int)
 		at java.lang.Class.getConstructor0(Unknown Source)
