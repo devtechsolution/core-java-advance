@@ -795,4 +795,87 @@ It can be used only for user defined datatypes and not for primitive types.
 	VOLATILE: false
 
 ```
+---
+#### Creating object using default Constructor
 
+- ***public Object newInstance()**
+####Lab1374.java
+```java
+	package org.as.devtechsolution.reflection.ex5;
+	
+	public class Lab1374 {
+	
+		public static void main(String[] args)  {
+			String cname= "org.as.devtechsolution.reflection.ex5.User";
+			try {
+				Class c1= Class.forName(cname);
+				Object obj= c1.newInstance();
+				System.out.println(obj);
+			} catch (  ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	class User{
+		public User() {
+			System.out.println("User Def Cons");
+		}
+	}
+```
+####Output:
+```
+User Def Cons
+org.as.devtechsolution.reflection.ex5.User@15db9742
+
+```
+
+- If we know the parameter types of the constructor we want to access, we can use the **```getDeclaredConstructor(Class[] paramTypes)``` with  array of Class object** rather than obtain the array of all constructors.
+	-- ```Constructor c= c1.getDeclaredConstructor(Class[] paramTypes)```
+- It will throw **java.lang.NoSuchMethodException** if the required constructor  not found.
+
+####Lab1375.java
+```java
+
+	package org.as.devtechsolution.reflection.ex5;
+	
+	import java.lang.reflect.Constructor;
+	
+	public class Lab1375 {
+		
+		public static void main(String[] args) {
+			
+			String cname= "org.as.devtechsolution.reflection.ex5.Employee";
+			
+			try {
+				Class c1= Class.forName(cname);
+				
+				Class paramsReq1[] = new Class[] { int.class, String.class, int.class, long.class };
+				Constructor cons1= c1.getDeclaredConstructor(paramsReq1);
+				System.out.println(cons1);
+				
+				Class paramsReq2[] = new Class[] { String.class, int.class };
+				Constructor cons2= c1.getDeclaredConstructor(paramsReq2);
+	 			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	}
+	
+	class Employee{
+		public Employee(int eid, String nm, int age, long phone) {	}
+		public Employee(int eid, String nm) {
+		}
+	}
+```
+####Output:
+	public org.as.devtechsolution.reflection.ex5.Employee(int,java.lang.String,int,long)
+	java.lang.NoSuchMethodException: org.as.devtechsolution.reflection.ex5.Employee.<init>(java.lang.String, int)
+		at java.lang.Class.getConstructor0(Unknown Source)
+		at java.lang.Class.getDeclaredConstructor(Unknown Source)
+		at org.as.devtechsolution.reflection.ex5.Lab1375.main(Lab1375.java:19)
+
+```
