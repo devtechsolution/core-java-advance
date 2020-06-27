@@ -25,7 +25,8 @@
 * It is used to load the class dynamically and return the instance of **java.lang.Class**
 * It should be used if we know the fully qualified name of the class.
 * It can be used only for **User Defined** data types and nt for primitive types.
-----
+
+####Lab1364.java
 ```
 	package org.as.devtechsolution.reflection.ex1;
 
@@ -50,3 +51,47 @@
 
 ```
 
+#### Output:
+```
+	Class loaded Successfully
+	Class Name: org.as.devtechsolution.reflection.ex1.Hello
+	Class loaded Successfully
+```
+
+---
+### 2. getClass() method of java.lang.Object
+* It returns the instance of **java.lang.Class**.
+* It should be used if we have the object of class.
+It can be used only for user defined datatypes and not for primitive types.
+
+####Lab1365.java
+```
+	package org.as.devtechsolution.reflection.ex1;
+
+	public class Lab1365 {
+	
+		public static void main(String[] args) {
+			showClassInfo("OK");
+			showClassInfo(new Lab1365());
+			Hello h= new Hello();
+			showClassInfo(h);
+		}
+		
+		static void showClassInfo(Object obj) {
+			Class cls= obj.getClass();
+			System.out.println("\nClass Nme:"+ cls.getName());
+		}
+		
+	}
+
+```
+####Output:
+```
+	Class Nme:java.lang.String
+
+	Class Nme:org.as.devtechsolution.reflection.ex1.Lab1365
+
+	Class Nme:org.as.devtechsolution.reflection.ex1.Hello
+	
+	
+```

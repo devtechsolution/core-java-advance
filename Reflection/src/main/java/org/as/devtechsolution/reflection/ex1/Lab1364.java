@@ -17,4 +17,3 @@ public class Lab1364 {
 }
 
 
-class Hello{}
