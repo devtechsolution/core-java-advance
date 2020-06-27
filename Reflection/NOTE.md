@@ -304,3 +304,276 @@ It can be used only for user defined datatypes and not for primitive types.
 	
 ```
 
+---
+
+| Methods | Description |
+| --- | --- |
+| `public Constructor<?>[] getConstructors()` | Returns all the public constructors. |
+| `public Constructor<?>[] getDeclaredConstructors()` | Returns all the public and non-public constructors. |
+| `public Method[] getMethods()` | Returns All public methods of current and super-classes.|
+| `public Method[] getDeclaredMethods()` | Returns All public and non-public methods of current class only. |
+| `public Field[] getFields()` | Returns All public fields(variable) of current and super-classes.|
+| `public Field[] getDeclaredFields()` | Returns All public and non-public variable  of current class only. |
+| `public Class[] getClasss()` | Returns All public inner classes of current and super-classes.|
+| `public Class[] getDeclaredClasses()` | Returns All public and non-public inner classes of current class only. |
+| `public Annotation[] getAnnotations()` | Returns All Annotations marked for current class. |
+
+
+#### Hello.java
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	class Hello{
+		public String data;
+		int value;
+		public final void processData(int ab, String st) {	}
+		boolean isValid() {
+			return false;
+		}
+		public class Inner1{}
+		class Inner2{}
+	}
+```
+
+#### Hai.java
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	public class Hai extends Hello{
+		
+		String name; 
+		public int id;
+		protected double fee;
+		private long phone;
+		
+		private Hai() {}
+		private Hai(int ab, String st) {}
+		
+		public Hai(char ch, long val, boolean b1) {}
+		Hai(char ch, double val, String st){}
+		
+		public Hai(int ab, long val, float f1) {}
+		protected Hai(byte by,boolean b1, float f2) {}
+		
+		void show() {}
+		
+		public void display(int ab, boolean valid, long phn) {}
+		private int[] getValues(String nm, long phn) {
+			return null;
+		}
+		class A{}
+		public class B{}
+		class C{}
+	}
+	
+```
+
+#### Lab1369.java
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	import java.lang.reflect.Constructor;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1369 {
+		
+		public static void main(String[] args) throws ClassNotFoundException {
+			String cname= "org.as.devtechsolution.reflection.ex3.Hai";
+			
+			Class cl= Class.forName(cname);
+			
+			System.out.println("\n PUBLIC CONSTRUCTORS");
+			
+			Constructor [] publicCons= cl.getConstructors();
+			Stream<Constructor> publicConstStream = Arrays.stream(publicCons);
+			// publicConstStream.forEach(constructor-> System.out.println(constructor));
+			publicConstStream.forEach(System.out::println);
+			
+			System.out.println("\n DECLARED CONSTRUCTORS");
+			
+			Constructor [] declaredCons= cl.getDeclaredConstructors();
+			Stream<Constructor> declaredConsStream = Arrays.stream(declaredCons);
+			// declaredConsStream.forEach(constructor-> System.out.println(constructor));
+			declaredConsStream.forEach(System.out::println);
+		}
+	
+	}	
+
+```
+
+#### Outtput:
+```
+	
+ 	PUBLIC CONSTRUCTORS
+	public org.as.devtechsolution.reflection.ex3.Hai(int,long,float)
+	public org.as.devtechsolution.reflection.ex3.Hai(char,long,boolean)
+	
+	 DECLARED CONSTRUCTORS
+	protected org.as.devtechsolution.reflection.ex3.Hai(byte,boolean,float)
+	public org.as.devtechsolution.reflection.ex3.Hai(int,long,float)
+	org.as.devtechsolution.reflection.ex3.Hai(char,double,java.lang.String)
+	private org.as.devtechsolution.reflection.ex3.Hai()
+	private org.as.devtechsolution.reflection.ex3.Hai(int,java.lang.String)
+	public org.as.devtechsolution.reflection.ex3.Hai(char,long,boolean)
+	
+```
+#### Lab1370.java
+
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	import java.lang.reflect.Method;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1370 {
+		public static void main(String[] args) throws ClassNotFoundException {
+			String cname= "org.as.devtechsolution.reflection.ex3.Hai";
+			
+			Class cl= Class.forName(cname);
+			
+			System.out.println("\n PUBLIC METHODS");
+			
+			Method [] publicMethod= cl.getMethods();
+			Stream<Method> publicMethodStream = Arrays.stream(publicMethod);
+			/* publicMethod.forEach(method-> System.out.println(method));*/
+			publicMethodStream.forEach(System.out::println);
+			
+			System.out.println("\n DECLARED METHODS");
+			
+			Method [] dclaredMethod= cl.getDeclaredMethods();
+			Stream<Method> dclaredMethodStream = Arrays.stream(dclaredMethod);
+			/* dclaredMethodStream.forEach(method-> System.out.println(method));*/
+			dclaredMethodStream.forEach(System.out::println);
+		}
+	
+	}
+	
+
+```
+#### Output:
+```
+	
+ 	PUBLIC METHODS
+	public void org.as.devtechsolution.reflection.ex3.Hai.display(int,boolean,long)
+	public final void org.as.devtechsolution.reflection.ex3.Hello.processData(int,java.lang.String)
+	public final void java.lang.Object.wait() throws java.lang.InterruptedException
+	public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+	public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+	public boolean java.lang.Object.equals(java.lang.Object)
+	public java.lang.String java.lang.Object.toString()
+	public native int java.lang.Object.hashCode()
+	public final native java.lang.Class java.lang.Object.getClass()
+	public final native void java.lang.Object.notify()
+	public final native void java.lang.Object.notifyAll()
+	
+	 DECLARED METHODS
+	private int[] org.as.devtechsolution.reflection.ex3.Hai.getValues(java.lang.String,long)
+	void org.as.devtechsolution.reflection.ex3.Hai.show()
+	public void org.as.devtechsolution.reflection.ex3.Hai.display(int,boolean,long)
+	
+```
+
+#### Lab1371.java
+
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	import java.lang.reflect.Field;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1371 {
+		
+		public static void main(String[] args) throws ClassNotFoundException {
+			String cname= "org.as.devtechsolution.reflection.ex3.Hai";
+			
+			Class cl= Class.forName(cname);
+			
+			System.out.println("\n PUBLIC FIELDS");
+			
+			Field [] publicFields= cl.getFields();
+			Stream<Field> publicFieldStream = Arrays.stream(publicFields);
+			/* publicFieldStream.forEach(method-> System.out.println(method));*/
+			publicFieldStream.forEach(System.out::println);
+			
+			System.out.println("\n DECLARED FIELDS");
+			
+			Field[] dclaredFields= cl.getDeclaredFields();
+			Stream<Field> dclaredFieldStream = Arrays.stream(dclaredFields);
+			/* dclaredFieldStream.forEach(method-> System.out.println(method));*/
+			dclaredFieldStream.forEach(System.out::println);
+		}
+	
+	}
+
+	
+
+```
+#### Output:
+```
+	
+ 	
+ 	PUBLIC FIELDS
+	public int org.as.devtechsolution.reflection.ex3.Hai.id
+	public java.lang.String org.as.devtechsolution.reflection.ex3.Hello.data
+	
+	DECLARED FIELDS
+	java.lang.String org.as.devtechsolution.reflection.ex3.Hai.name
+	public int org.as.devtechsolution.reflection.ex3.Hai.id
+	protected double org.as.devtechsolution.reflection.ex3.Hai.fee
+	private long org.as.devtechsolution.reflection.ex3.Hai.phone
+
+	
+```
+
+#### Lab1372.java
+
+```java
+	package org.as.devtechsolution.reflection.ex3;
+
+	import java.lang.reflect.Field;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1372 {
+		
+		public static void main(String[] args) throws ClassNotFoundException {
+			String cname= "org.as.devtechsolution.reflection.ex3.Hai";
+			
+			Class cl= Class.forName(cname);
+			
+			System.out.println("\n PUBLIC INNER-CLASSES");
+			
+			Class [] publicInnerClasses= cl.getClasses();
+			Stream<Class> publicInnerClassStream = Arrays.stream(publicInnerClasses);
+			/* publicInnerClassStream.forEach(method-> System.out.println(method));*/
+			publicInnerClassStream.forEach(System.out::println);
+			
+			System.out.println("\n DECLARED INNER-CLASSES");
+			
+			Class [] declaredInnerClasses= cl.getClasses();
+			Stream<Class> declaredInnerClassStream = Arrays.stream(declaredInnerClasses);
+			/* declaredInnerClassStream.forEach(method-> System.out.println(method));*/
+			declaredInnerClassStream.forEach(System.out::println);
+		}
+	
+	}
+
+	
+
+```
+#### Output:
+```
+	
+ 	PUBLIC INNER-CLASSES
+	class org.as.devtechsolution.reflection.ex3.Hai$B
+	class org.as.devtechsolution.reflection.ex3.Hello$Inner1
+	
+	DECLARED INNER-CLASSES
+	class org.as.devtechsolution.reflection.ex3.Hai$B
+	class org.as.devtechsolution.reflection.ex3.Hello$Inner1
+		
+	
+```
