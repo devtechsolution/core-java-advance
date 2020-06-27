@@ -26,7 +26,7 @@
 * It should be used if we know the fully qualified name of the class.
 * It can be used only for **User Defined** data types and nt for primitive types.
 
-####Lab1364.java
+#### Lab1364.java
 ```
 	package org.as.devtechsolution.reflection.ex1;
 
@@ -64,7 +64,7 @@
 * It should be used if we have the object of class.
 It can be used only for user defined datatypes and not for primitive types.
 
-####Lab1365.java
+#### Lab1365.java
 ```
 	package org.as.devtechsolution.reflection.ex1;
 
@@ -85,7 +85,7 @@ It can be used only for user defined datatypes and not for primitive types.
 	}
 
 ```
-####Output:
+#### Output:
 ```
 	Class Nme:java.lang.String
 
