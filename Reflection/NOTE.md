@@ -577,3 +577,222 @@ It can be used only for user defined datatypes and not for primitive types.
 		
 	
 ```
+
+### Accessing Modifiers Information
+- **public int getModifiers()**: To get the modifiers information for the class, methods, fields etc.
+- Constants are defined for all the modifiers in **java.lang.reflect.Modifier.class**.
+- **getModifiers() method returns int value** i.e. **sum of t all the constants of modifiers** used.
+- To verify the specific modifier used or not:
+	- **public static String toString(int modifirs)**
+	- **public static boolean isXXX(int modifirs)** 
+		- XXX is **modifier name**
+		- Ex:- **Public, Private, Protected, Abstract, Final Static etc.**
+```java
+			Modifier and Type		 Constant Field	Value
+			
+			
+			 public static final int ABSTRACT 		1024 
+			 public static final int FINAL 			16 
+			 public static final int INTERFACE 		512 
+			 public static final int NATIVE 		256 
+			 public static final int PRIVATE 		2 
+			 public static final int PROTECTED 		4 
+			 public static final int PUBLIC 		1 
+			 public static final int STATIC 		8 
+			 public static final int STRICT 		2048 
+			 public static final int SYNCHRONIZED 	32 
+			 public static final int TRANSIENT 		128 
+			 public static final int VOLATILE 		64 
+```
+#### Lab1373.java
+
+```java
+	package org.as.devtechsolution.reflection.ex4;
+
+	import java.lang.reflect.Method;
+	import java.lang.reflect.Modifier;
+	import java.util.Arrays;
+	import java.util.stream.Stream;
+	
+	public class Lab1373 {
+		
+		public static void main(String[] args) {
+			try {
+				Class cl= Class.forName("org.as.devtechsolution.reflection.ex4.Employee");
+				System.out.println("PUBLIC: "+ Modifier.PUBLIC);
+				System.out.println("PRIVATE: "+ Modifier.PRIVATE);
+				System.out.println("PROTECTED: "+ Modifier.PROTECTED);
+				System.out.println("FINAL: "+ Modifier.FINAL);
+				System.out.println("STATIC: "+ Modifier.STATIC);
+				System.out.println("NATIVE: "+ Modifier.NATIVE);
+				System.out.println("ABSTRACT: "+ Modifier.ABSTRACT);
+				System.out.println("SYNCHRONIZED: "+ Modifier.SYNCHRONIZED);
+				System.out.println("ABSTRACT: "+ Modifier.ABSTRACT);
+				System.out.println("STRICT: "+ Modifier.STRICT);
+				System.out.println("TRANSIENT: "+ Modifier.TRANSIENT);
+				System.out.println("VOLATILE: "+ Modifier.VOLATILE);
+				
+				/*
+				
+				Modifier and Type		Constant Field	Value
+				
+				
+				 public static final int ABSTRACT 		1024 
+				 public static final int FINAL 			16 
+				 public static final int INTERFACE 		512 
+				 public static final int NATIVE 		256 
+				 public static final int PRIVATE 		2 
+				 public static final int PROTECTED 		4 
+				 public static final int PUBLIC 		1 
+				 public static final int STATIC 		8 
+				 public static final int STRICT 		2048 
+				 public static final int SYNCHRONIZED 	32 
+				 public static final int TRANSIENT 		128 
+				 public static final int VOLATILE 		64 
+				 */
+				
+				Method declaredMethods[]= cl.getDeclaredMethods();
+				
+				Stream<Method> declaredMethodStream = Arrays.stream(declaredMethods);
+				/* publicMethod.forEach(method-> System.out.println(method));*/
+				// declaredMethodStream.forEach(System.out::println);
+				
+				declaredMethodStream.forEachOrdered(
+							m->{
+								System.out.println("\n*****"+m);
+								int modifiers = m.getModifiers();
+								System.out.println("Modifiers: "+ modifiers);
+								String str = Modifier.toString(modifiers);
+								System.out.println("STR: "+str);
+								System.out.println("PUBLIC: "+ Modifier.isPublic(modifiers));
+								System.out.println("PRIVATE: "+ Modifier.isPrivate(modifiers));
+								System.out.println("PROTECTED: "+ Modifier.isProtected(modifiers));
+								System.out.println("FINAL: "+ Modifier.isFinal(modifiers));
+								System.out.println("STATIC: "+ Modifier.isStatic(modifiers));
+								System.out.println("NATIVE: "+ Modifier.isNative(modifiers));
+								System.out.println("ABSTRACT: "+ Modifier.isAbstract(modifiers));
+								System.out.println("SYNCHRONIZED: "+ Modifier.isSynchronized(modifiers));
+								System.out.println("ABSTRACT: "+ Modifier.isAbstract(modifiers));
+								System.out.println("STRICT: "+ Modifier.isStrict(modifiers));
+								System.out.println("TRANSIENT: "+ Modifier.isTransient(modifiers));
+								System.out.println("VOLATILE: "+ Modifier.isVolatile(modifiers));
+								
+							}
+						);
+			} catch (ClassNotFoundException e) {
+				System.out.println("Employee class not found");
+				e.printStackTrace();
+			}
+		}
+		
+	
+	}
+	
+	abstract class Employee{
+		//public void m1() {	}
+		native final void m2();
+		public synchronized void m3() { }
+		protected abstract void m4();
+		private static final void m5() { }
+		void m6() { }
+	}
+		
+```
+
+####Output:
+```
+	PUBLIC: 1
+	PRIVATE: 2
+	PROTECTED: 4
+	FINAL: 16
+	STATIC: 8
+	NATIVE: 256
+	ABSTRACT: 1024
+	SYNCHRONIZED: 32
+	ABSTRACT: 1024
+	STRICT: 2048
+	TRANSIENT: 128
+	VOLATILE: 64
+	
+	*****private static final void org.as.devtechsolution.reflection.ex4.Employee.m5()
+	Modifiers: 26
+	STR: private static final
+	PUBLIC: false
+	PRIVATE: true
+	PROTECTED: false
+	FINAL: true
+	STATIC: true
+	NATIVE: false
+	ABSTRACT: false
+	SYNCHRONIZED: false
+	ABSTRACT: false
+	STRICT: false
+	TRANSIENT: false
+	VOLATILE: false
+	
+	*****public synchronized void org.as.devtechsolution.reflection.ex4.Employee.m3()
+	Modifiers: 33
+	STR: public synchronized
+	PUBLIC: true
+	PRIVATE: false
+	PROTECTED: false
+	FINAL: false
+	STATIC: false
+	NATIVE: false
+	ABSTRACT: false
+	SYNCHRONIZED: true
+	ABSTRACT: false
+	STRICT: false
+	TRANSIENT: false
+	VOLATILE: false
+	
+	*****protected abstract void org.as.devtechsolution.reflection.ex4.Employee.m4()
+	Modifiers: 1028
+	STR: protected abstract
+	PUBLIC: false
+	PRIVATE: false
+	PROTECTED: true
+	FINAL: false
+	STATIC: false
+	NATIVE: false
+	ABSTRACT: true
+	SYNCHRONIZED: false
+	ABSTRACT: true
+	STRICT: false
+	TRANSIENT: false
+	VOLATILE: false
+	
+	*****void org.as.devtechsolution.reflection.ex4.Employee.m6()
+	Modifiers: 0
+	STR: 
+	PUBLIC: false
+	PRIVATE: false
+	PROTECTED: false
+	FINAL: false
+	STATIC: false
+	NATIVE: false
+	ABSTRACT: false
+	SYNCHRONIZED: false
+	ABSTRACT: false
+	STRICT: false
+	TRANSIENT: false
+	VOLATILE: false
+	
+	*****final native void org.as.devtechsolution.reflection.ex4.Employee.m2()
+	Modifiers: 272
+	STR: final native
+	PUBLIC: false
+	PRIVATE: false
+	PROTECTED: false
+	FINAL: true
+	STATIC: false
+	NATIVE: true
+	ABSTRACT: false
+	SYNCHRONIZED: false
+	ABSTRACT: false
+	STRICT: false
+	TRANSIENT: false
+	VOLATILE: false
+
+```
+
