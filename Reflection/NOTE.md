@@ -1,15 +1,15 @@
 ### Introduction
 * Java Reflection allow us 
- * To inspect classes, interfaces, fields and methods at runtime.
- * To instantiate new objects.
- * To invoke methods dynamically at runtime.
- * To modify or access the values of fields.
+	 * To inspect classes, interfaces, fields and methods at runtime.
+	 * To instantiate new objects.
+	 * To invoke methods dynamically at runtime.
+	 * To modify or access the values of fields.
 
 * Java Reflection API mainly used in:
- * IDE's (Integrated Development Environment) e.g. Eclipse, STS, NetBeans etc.
- * Debugger
- * Servers
- * Testing tools etc.
+	 * IDE's (Integrated Development Environment) e.g. Eclipse, STS, NetBeans etc.
+	 * Debugger
+	 * Servers
+	 * Testing tools etc.
  
 * JVM creates default object of type **java.lang.Class** while loading the class.
 * All types in Java including primitive types( int, long, double, float,char etc.) and arrays having default objects of type **java.lang.Class**.
